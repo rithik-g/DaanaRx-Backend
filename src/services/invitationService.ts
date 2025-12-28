@@ -1,6 +1,6 @@
 import { supabaseServer, supabaseAuth } from '../utils/supabase';
 import { generateToken } from '../utils/auth';
-import type { Invitation } from '../types';
+import type { Invitation, User } from '../types';
 import { emailService } from './emailService';
 
 export interface SendInvitationInput {
