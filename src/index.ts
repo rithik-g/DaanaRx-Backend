@@ -39,6 +39,16 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Request logging middleware
+app.use((req, _res, next) => {
+  Logger.info(`${req.method} ${req.path}`, {
+    origin: req.headers.origin,
+    hasAuth: !!req.headers.authorization,
+    userAgent: req.headers['user-agent']?.substring(0, 50),
+  });
+  next();
+});
+
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
