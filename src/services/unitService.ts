@@ -7,7 +7,7 @@ import { getLotById, getLotCurrentCapacity } from './locationService';
  * Create a new unit
  */
 export async function createUnit(
-  input: CreateUnitRequest,
+  input: any,
   userId: string,
   clinicId: string
 ): Promise<Unit> {
