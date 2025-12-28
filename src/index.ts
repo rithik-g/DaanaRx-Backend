@@ -72,7 +72,7 @@ app.get('/', (_req: Request, res: Response) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: NODE_ENV !== 'production', // Enable introspection in dev
+  introspection: true, // Enable introspection for Apollo Client compatibility
   formatError: (error) => {
     Logger.error('GraphQL Error:', {
       message: error.message,
