@@ -452,10 +452,10 @@ export const invitationService = {
             username: data.invitedByUser.username,
             email: data.invitedByUser.email,
             clinicId: '', // Not needed for this context
-            userRole: 'user', // Default role
+            userRole: 'employee' as const, // Default role
             createdAt: new Date(),
             updatedAt: new Date(),
-          } as User
+          }
         : undefined,
       userRole: data.user_role,
       status: data.status,
