@@ -247,7 +247,7 @@ export async function checkOutMedicationFEFO(
  * Check out a unit (dispense medication)
  */
 export async function checkOutUnit(
-  input: any,
+  input: CheckOutRequest,
   userId: string,
   clinicId: string
 ): Promise<Transaction> {

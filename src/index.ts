@@ -39,16 +39,6 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// Request logging middleware
-app.use((req, _res, next) => {
-  Logger.info(`${req.method} ${req.path}`, {
-    origin: req.headers.origin,
-    hasAuth: !!req.headers.authorization,
-    userAgent: req.headers['user-agent']?.substring(0, 50),
-  });
-  next();
-});
-
 // Health check endpoint
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({
@@ -72,7 +62,7 @@ app.get('/', (_req: Request, res: Response) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true, // Enable introspection for Apollo Client compatibility
+  introspection: NODE_ENV !== 'production', // Enable introspection in dev
   formatError: (error) => {
     Logger.error('GraphQL Error:', {
       message: error.message,

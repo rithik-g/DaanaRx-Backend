@@ -7,10 +7,19 @@ import { getLotById, getLotCurrentCapacity } from './locationService';
  * Create a new unit
  */
 export async function createUnit(
-  input: any,
+  input: CreateUnitRequest,
   userId: string,
   clinicId: string
 ): Promise<Unit> {
+  console.log('[UnitService] Creating unit with input:', {
+    totalQuantity: input.totalQuantity,
+    availableQuantity: input.availableQuantity,
+    lotId: input.lotId,
+    expiryDate: input.expiryDate,
+    userId,
+    clinicId,
+  });
+
   let drugId = input.drugId;
 
   // If drugData is provided, get or create the drug
@@ -61,7 +70,7 @@ export async function createUnit(
     .single();
 
   if (error || !unit) {
-    console.error('Error creating unit:', {
+    console.error('[UnitService] Error creating unit:', {
       error,
       errorMessage: error?.message,
       errorDetails: error?.details,
@@ -75,6 +84,12 @@ export async function createUnit(
     });
     throw new Error(`Failed to create unit: ${error?.message || 'Unknown error'}`);
   }
+
+  console.log('[UnitService] Unit created successfully:', {
+    unitId: unit.unit_id,
+    totalQuantity: unit.total_quantity,
+    availableQuantity: unit.available_quantity,
+  });
 
   // Update the unit with its own ID as the QR code (simple and effective)
   const { error: qrError } = await supabaseServer

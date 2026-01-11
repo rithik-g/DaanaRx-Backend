@@ -5,7 +5,7 @@ import { Feedback } from '../types';
  * Create new feedback
  */
 export async function createFeedback(
-  input: any,
+  input: CreateFeedbackRequest,
   userId: string,
   clinicId: string
 ): Promise<Feedback> {

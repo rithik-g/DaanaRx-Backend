@@ -1,6 +1,6 @@
 import { supabaseServer, supabaseAuth } from '../utils/supabase';
 import { generateToken } from '../utils/auth';
-import type { Invitation, User } from '../types';
+import type { Invitation } from '../types';
 import { emailService } from './emailService';
 
 export interface SendInvitationInput {
@@ -451,10 +451,6 @@ export const invitationService = {
             userId: data.invitedByUser.user_id,
             username: data.invitedByUser.username,
             email: data.invitedByUser.email,
-            clinicId: '', // Not needed for this context
-            userRole: 'employee' as const, // Default role
-            createdAt: new Date(),
-            updatedAt: new Date(),
           }
         : undefined,
       userRole: data.user_role,
