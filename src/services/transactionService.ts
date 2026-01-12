@@ -1,5 +1,5 @@
 import { supabaseServer } from '../utils/supabase';
-import { Transaction } from '../types';
+import { Transaction, CheckOutRequest } from '../types';
 
 /**
  * FEFO Checkout Result

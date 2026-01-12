@@ -1,5 +1,5 @@
 import { supabaseServer } from '../utils/supabase';
-import { Unit } from '../types';
+import { Unit, CreateUnitRequest } from '../types';
 import { getOrCreateDrug } from './drugService';
 import { getLotById, getLotCurrentCapacity } from './locationService';
 

@@ -129,7 +129,7 @@ export interface Invitation {
   expiresAt: Date;
   acceptedAt?: Date;
   clinic?: Clinic;
-  invitedByUser?: User;
+  invitedByUser?: Pick<User, 'userId' | 'username' | 'email'>;
 }
 
 // Feedback types
@@ -141,5 +141,39 @@ export interface Feedback {
   feedbackMessage: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CreateFeedbackRequest {
+  feedbackType: 'Feature_Request' | 'Bug' | 'Other';
+  feedbackMessage: string;
+}
+
+// Unit Request types
+export interface CreateUnitRequest {
+  totalQuantity: number;
+  availableQuantity: number;
+  lotId: string;
+  expiryDate: Date | string;
+  drugId?: string;
+  drugData?: {
+    medicationName: string;
+    genericName: string;
+    strength: number;
+    strengthUnit: string;
+    ndcId: string;
+    form: string;
+  };
+  patientReferenceId?: string;
+  optionalNotes?: string;
+  manufacturerLotNumber?: string;
+}
+
+// Transaction Request types
+export interface CheckOutRequest {
+  unitId: string;
+  quantity: number;
+  patientName?: string;
+  patientReferenceId?: string;
+  notes?: string;
 }
 
